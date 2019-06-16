@@ -10,7 +10,7 @@ class Presenter(private val view: MacView) {
     }
 
     private val saveXMLFileCompletionHandler = { result: FileWriterResult ->
-        if (result == FileWriterResult.SUCCESS) {
+        if (result == FileWriterResult.FAILURE) {
             view.showAlert("Saving failed!", "Could not save file to disk!")
         }
     }

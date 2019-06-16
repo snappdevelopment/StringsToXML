@@ -11,46 +11,33 @@ import StringsToXMLKt
 
 class ViewController: NSViewController, MacView {
     
-
+    @IBOutlet var idsTextView: NSTextView!
+    @IBOutlet var stringsTextView: NSTextView!
+    var presenter: Presenter!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        presenter = Presenter(view: self)
         
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear() {
-        print("viewDidAppear")
-//        let saveDialog = NSSavePanel()
-//        saveDialog.title = "Save as..."
-//        saveDialog.isExtensionHidden = false
-//        saveDialog.nameFieldStringValue = "strings.xml"
-//        //saveDialog.runModal()
-//        saveDialog.begin { result in
-//            let directory = saveDialog.directoryURL
-//            let filename = saveDialog.nameFieldStringValue
-//            print(directory)
-//            print(filename)
-//            if (result == .OK) {
-//                do {
-//                    //try "hello".write(to: URL(string: "\(directory!)\(filename)")!, atomically: true, encoding: String.Encoding.utf8)
-//                    //let success = FileManager().createFile(atPath: "\(directory!)\(filename)", contents: "hello".data(using: .utf8), attributes: nil)
-//                    try "hello".data(using: .utf8)?.write(to: URL(string: "\(directory!)\(filename)")!)
-//
-//                    print("written")
-//                } catch {
-//
-//                    print("write failed")
-//                }
-//            }
-//        }
-        let presenter = Presenter(view: self)
-        presenter.createXMLFromText(ids: "id1\nid2", translationStrings: "translation1\ntranslation2")
-        
+        idsTextView.textContainer?.containerSize = NSMakeSize(.greatestFiniteMagnitude, .greatestFiniteMagnitude)
+        stringsTextView.textContainer?.containerSize = NSMakeSize(.greatestFiniteMagnitude, .greatestFiniteMagnitude)
+
     }
 
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
+        }
+    }
+    
+    @IBAction func saveButtonClicked(_ sender: NSButton) {
+        if let idsString = idsTextView.textStorage, let translationString = stringsTextView.textStorage {
+            presenter.createXMLFromText(ids: idsString.string, translationStrings: translationString.string)
+        }
+        else {
+            showAlert(title: "Saving failed!", message: "Could not get text from the text boxes!")
         }
     }
     
