@@ -16,7 +16,7 @@ class FileWriter {
             if (result == NSFileHandlingPanelOKButton.toLong()) {
                 val filepathAndName = saveDialog.filename()
                 val xmlAsNSString = NSString.create(string = xmlContent)
-                val writeResponse = xmlAsNSString.writeToURL(NSURL(fileURLWithPath = filepathAndName), true)
+                val writeResponse = xmlAsNSString.writeToURL(NSURL(fileURLWithPath = filepathAndName), true, NSUTF8StringEncoding, null)
                 writeSuccess = if(writeResponse) FileWriterResult.SUCCESS else FileWriterResult.FAILURE
             }
             saveDialog.close()

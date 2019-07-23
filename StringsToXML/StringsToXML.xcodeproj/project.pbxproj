@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E5AC41B22C4A80400D45277 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E5AC41A22C4A80400D45277 /* PreviewViewController.swift */; };
 		9EFEB94D22B11E69003F4FCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFEB94C22B11E69003F4FCD /* AppDelegate.swift */; };
 		9EFEB94F22B11E69003F4FCD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EFEB94E22B11E69003F4FCD /* ViewController.swift */; };
 		9EFEB95122B11E6A003F4FCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9EFEB95022B11E6A003F4FCD /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9E5AC41A22C4A80400D45277 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		9EFEB94922B11E69003F4FCD /* StringsToXML.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StringsToXML.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EFEB94C22B11E69003F4FCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EFEB94E22B11E69003F4FCD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			children = (
 				9EFEB94C22B11E69003F4FCD /* AppDelegate.swift */,
 				9EFEB94E22B11E69003F4FCD /* ViewController.swift */,
+				9E5AC41A22C4A80400D45277 /* PreviewViewController.swift */,
 				9EFEB95022B11E6A003F4FCD /* Assets.xcassets */,
 				9EFEB95222B11E6A003F4FCD /* Main.storyboard */,
 				9EFEB95522B11E6A003F4FCD /* Info.plist */,
@@ -167,6 +170,7 @@
 			files = (
 				9EFEB94F22B11E69003F4FCD /* ViewController.swift in Sources */,
 				9EFEB94D22B11E69003F4FCD /* AppDelegate.swift in Sources */,
+				9E5AC41B22C4A80400D45277 /* PreviewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

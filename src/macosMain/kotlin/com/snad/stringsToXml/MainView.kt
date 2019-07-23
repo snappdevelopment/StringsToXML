@@ -1,5 +1,5 @@
 package com.snad.stringsToXml
 
-interface MacView {
+interface MainView {
     fun showAlert(title: String, message: String)
 }

@@ -9,12 +9,11 @@
 import Cocoa
 import StringsToXMLKt
 
-class ViewController: NSViewController, MacView {
+class ViewController: NSViewController, MainView {
     
     @IBOutlet var idsTextView: NSTextView!
     @IBOutlet var stringsTextView: NSTextView!
-    var presenter: Presenter!
-    
+    var presenter: MainPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,20 +24,15 @@ class ViewController: NSViewController, MacView {
         stringsTextView.textContainer?.containerSize = NSMakeSize(.greatestFiniteMagnitude, .greatestFiniteMagnitude)
 
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
     
     @IBAction func saveButtonClicked(_ sender: NSButton) {
-        if let idsString = idsTextView.textStorage, let translationString = stringsTextView.textStorage {
-            presenter.createXMLFromText(ids: idsString.string, translationStrings: translationString.string)
-        }
-        else {
-            showAlert(title: "Saving failed!", message: "Could not get text from the text boxes!")
-        }
+        presenter.onSaveButtonClicked(ids: idsTextView.string, translationStrings: stringsTextView.string)
+    }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        let xmlString = presenter.onPreviewButtonClicked(ids: idsTextView.string, translationStrings: stringsTextView.string)
+        let destinationVC = segue.destinationController as! PreviewViewController
+        destinationVC.xmlString = xmlString
     }
     
     func showAlert(title: String, message: String) {
@@ -49,7 +43,5 @@ class ViewController: NSViewController, MacView {
         alert.addButton(withTitle: "OK")
         alert.runModal()
     }
-
-
 }
 

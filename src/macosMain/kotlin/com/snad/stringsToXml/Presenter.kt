@@ -1,11 +1,35 @@
 package com.snad.stringsToXml
 
 
-class Presenter(private val view: MacView) {
+class Presenter(private val view: MainView): MainPresenter{
 
-    fun createXMLFromText(ids: String, translationStrings: String){
+    override fun onSaveButtonClicked(ids: String, translationStrings: String) {
+        val xmlString = createXMLFromText(ids, translationStrings)
+        if(xmlString.isNullOrEmpty()){
+            view.showAlert("Saving failed!", "Your lists differ in length or are empty!")
+        }
+        else {
+            saveXML(xmlString)
+        }
+    }
+
+    override fun onPreviewButtonClicked(ids: String, translationStrings: String): String? {
+        val xmlString = createXMLFromText(ids, translationStrings)
+        if(xmlString.isNullOrEmpty()) {
+            view.showAlert(
+                "No preview available!",
+                "XML couldn't be created. Your lists differ in length or are empty!"
+            )
+        }
+        return xmlString
+    }
+
+    private fun createXMLFromText(ids: String, translationStrings: String): String?{
         val translationsList = createTranslationsListFromText(ids, translationStrings)
-        val xmlString = XMLCreator().createXMLString(translationsList)
+        return if (translationsList.isEmpty()) null else XMLCreator().createXMLString(translationsList)
+    }
+
+    private fun saveXML(xmlString: String){
         FileWriter().saveXMLFile(xmlString, saveXMLFileCompletionHandler)
     }
 
@@ -15,19 +39,17 @@ class Presenter(private val view: MacView) {
         }
     }
 
-    fun createXMLFromCSV(){
-
-    }
-
-    private fun createTranslationsListFromText(ids: String, translationStrings: String) : MutableList<Translation> {
-        val idsStringList = ids.split("\n")
-        val translationStringsList = translationStrings.split("\n")
+    private fun createTranslationsListFromText(ids: String, translationStrings: String) : MutableList<Translation>{
+        val idStringsList = ids.trim().split("\n")
+        val translationStringsList = translationStrings.trim().split("\n")
 
         val translations: MutableList<Translation> = mutableListOf()
 
-        for ((index, translatedString) in translationStringsList.withIndex()) {
-            val translation = Translation(idsStringList[index], translatedString)
-            translations.add(translation)
+        if (idStringsList.size == translationStringsList.size) {
+            for ((index, idString) in idStringsList.withIndex()) {
+                val translation = Translation(idString, translationStringsList[index])
+                translations.add(translation)
+            }
         }
 
         return translations
