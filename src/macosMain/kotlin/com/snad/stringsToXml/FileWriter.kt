@@ -1,30 +1,14 @@
 package com.snad.stringsToXml
 
-import platform.AppKit.*
 import platform.Foundation.*
 
-class FileWriter {
+actual class FileWriter {
 
-    fun saveXMLFile(xmlContent: String, completionHandler: (result: FileWriterResult) -> Unit) {
-        var writeSuccess = FileWriterResult.CANCELLED
+    actual fun saveXMLFile(xmlContent: String, filepath: String, completionHandler: (result: FileWriterResult) -> Unit) {
+        val xmlAsNSString = NSString.create(string = xmlContent)
+        val writeResponse = xmlAsNSString.writeToURL(NSURL(fileURLWithPath = filepath), true, NSUTF8StringEncoding, null)
+        val writeSuccess = if(writeResponse) FileWriterResult.SUCCESS else FileWriterResult.FAILURE
 
-        var saveDialog = NSSavePanel()
-        saveDialog.title = "Save as..."
-        saveDialog.extensionHidden = false
-        saveDialog.nameFieldStringValue = "strings.xml"
-        saveDialog.beginWithCompletionHandler { result ->
-            if (result == NSFileHandlingPanelOKButton.toLong()) {
-                val filepathAndName = saveDialog.filename()
-                val xmlAsNSString = NSString.create(string = xmlContent)
-                val writeResponse = xmlAsNSString.writeToURL(NSURL(fileURLWithPath = filepathAndName), true, NSUTF8StringEncoding, null)
-                writeSuccess = if(writeResponse) FileWriterResult.SUCCESS else FileWriterResult.FAILURE
-            }
-            saveDialog.close()
-            completionHandler(writeSuccess)
-        }
+        completionHandler(writeSuccess)
     }
-}
-
-enum class FileWriterResult{
-    SUCCESS, FAILURE, CANCELLED
 }

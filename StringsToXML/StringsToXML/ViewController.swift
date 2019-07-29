@@ -14,6 +14,9 @@ class ViewController: NSViewController, MainView {
     @IBOutlet var idsTextView: NSTextView!
     @IBOutlet var stringsTextView: NSTextView!
     var presenter: MainPresenter!
+    var saveButtonListener: ((String, String) -> Void)?
+    var previewButtonListener: ((String, String) -> Void)?
+    var previewString: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +29,44 @@ class ViewController: NSViewController, MainView {
     }
     
     @IBAction func saveButtonClicked(_ sender: NSButton) {
-        presenter.onSaveButtonClicked(ids: idsTextView.string, translationStrings: stringsTextView.string)
+        saveButtonListener?(idsTextView.string, stringsTextView.string)
+    }
+    
+    @IBAction func previewButtonClicked(_ sender: NSButton) {
+        previewButtonListener?(idsTextView.string, stringsTextView.string)
     }
     
     override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
-        let xmlString = presenter.onPreviewButtonClicked(ids: idsTextView.string, translationStrings: stringsTextView.string)
         let destinationVC = segue.destinationController as! PreviewViewController
-        destinationVC.xmlString = xmlString
+        destinationVC.xmlString = previewString
+    }
+    
+    func showPreview(xmlString: String) {
+        previewString = xmlString
+        performSegue(withIdentifier: "previewSegue", sender: nil)
+    }
+    
+    func registerSaveButtonListener(listener: @escaping (String, String) -> Void) {
+        saveButtonListener = listener
+    }
+    
+    func registerPreviewButtonListener(listener: @escaping (String, String) -> Void) {
+        previewButtonListener = listener
+    }
+    
+    func showSaveDialog() -> String? {
+        var filepath: String? = nil
+        let saveDialog = NSSavePanel()
+        saveDialog.title = "Save as..."
+        saveDialog.isExtensionHidden = false
+        saveDialog.nameFieldStringValue = "strings.xml"
+        let result = saveDialog.runModal()
+        if (result == .OK) {
+            filepath = saveDialog.url?.path
+        }
+        saveDialog.close()
+ 
+        return filepath
     }
     
     func showAlert(title: String, message: String) {

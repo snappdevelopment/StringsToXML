@@ -795,8 +795,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="previewButtonClicked:" target="XfG-lQ-9wD" id="7fl-AX-VIo"/>
-                                    <segue destination="s9v-D7-t0c" kind="modal" id="hur-iM-2V2"/>
+                                    <action selector="previewButtonClicked:" target="XfG-lQ-9wD" id="vYZ-AW-dlR"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -822,6 +821,7 @@
                     <connections>
                         <outlet property="idsTextView" destination="h4s-Aa-vpl" id="WzB-q6-Zt3"/>
                         <outlet property="stringsTextView" destination="pvy-ar-AIW" id="6mj-dd-Qco"/>
+                        <segue destination="s9v-D7-t0c" kind="modal" identifier="previewSegue" id="Ht5-I7-UJ9"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

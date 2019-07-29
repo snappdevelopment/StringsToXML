@@ -3,17 +3,25 @@ package com.snad.stringsToXml
 
 class Presenter(private val view: MainView): MainPresenter{
 
+    init {
+        view.registerSaveButtonListener(::onSaveButtonClicked)
+        view.registerPreviewButtonListener(::onPreviewButtonClicked)
+    }
+
     override fun onSaveButtonClicked(ids: String, translationStrings: String) {
-        val xmlString = createXMLFromText(ids, translationStrings)
-        if(xmlString.isNullOrEmpty()){
-            view.showAlert("Saving failed!", "Your lists differ in length or are empty!")
-        }
-        else {
-            saveXML(xmlString)
+        val filepath = view.showSaveDialog()
+        if(filepath != null) {
+            val xmlString = createXMLFromText(ids, translationStrings)
+            if(xmlString.isNullOrEmpty()){
+                view.showAlert("Saving failed!", "Your lists differ in length or are empty!")
+            }
+            else {
+                FileWriter().saveXMLFile(xmlString, filepath, saveXMLFileCompletionHandler)
+            }
         }
     }
 
-    override fun onPreviewButtonClicked(ids: String, translationStrings: String): String? {
+    override fun onPreviewButtonClicked(ids: String, translationStrings: String) {
         val xmlString = createXMLFromText(ids, translationStrings)
         if(xmlString.isNullOrEmpty()) {
             view.showAlert(
@@ -21,16 +29,14 @@ class Presenter(private val view: MainView): MainPresenter{
                 "XML couldn't be created. Your lists differ in length or are empty!"
             )
         }
-        return xmlString
+        else {
+            view.showPreview(xmlString)
+        }
     }
 
     private fun createXMLFromText(ids: String, translationStrings: String): String?{
         val translationsList = createTranslationsListFromText(ids, translationStrings)
         return if (translationsList.isEmpty()) null else XMLCreator().createXMLString(translationsList)
-    }
-
-    private fun saveXML(xmlString: String){
-        FileWriter().saveXMLFile(xmlString, saveXMLFileCompletionHandler)
     }
 
     private val saveXMLFileCompletionHandler = { result: FileWriterResult ->
