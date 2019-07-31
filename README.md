@@ -6,7 +6,7 @@ StringsToXML is an application to convert translated strings into an Android com
 
 Many hobbyist Android developers use spreadsheets to manage their app translations. In order to import translated string into Android Studio, developers have to create a `strings.xml` file for each language. With StringsToXML it is possible, to copy and paste translated strings and their respective IDs, and save them as an XML file.
 
-<img src="screenshots/StringsToXMLGif.gif" width="720">
+![gif](screenshots/StringsToXMLGif.gif)
 
 ## About
 
