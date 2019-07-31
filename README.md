@@ -1,4 +1,4 @@
-# StringsToXML
+# <img src="screenshots/StringsToXMLIcon.png" height="25"> StringsToXML 
 
 ![](https://img.shields.io/badge/Platform-macOS|Java-lightgrey) ![](https://img.shields.io/badge/Version-1.0-blue) ![](https://img.shields.io/badge/KotlinNative-1.3.40-brightgreen) ![](https://img.shields.io/badge/License-GNU_v3.0-blue)
 
