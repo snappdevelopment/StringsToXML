@@ -9,7 +9,7 @@ class XMLCreator {
         var xmlString = ""
 
         for(translation in translations) {
-            xmlString = xmlString.plus("  <string name=\"${translation.id}\">${translation.translatedString}</string>\n")
+            xmlString = xmlString.plus("\t<string name=\"${translation.id}\">${translation.translatedString}</string>\n")
         }
 
         return header.plus(xmlString).plus(footer)
