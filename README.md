@@ -16,9 +16,9 @@ This app was made using `Kotlin Native` version `1.3` to create a native `macOS 
 
 #### Version 1.0
 
-- macOS 10.10+: StringsToXML.app
-- Java (Win/Mac/Linux): StringsToXML.jar
-- Source: Release 1.0
+- macOS 10.10+: [StringsToXML.app](https://github.com/snappdevelopment/StringsToXMLNative/releases/download/1.0/StringsToXML.app.zip)
+- Java (Win/Mac/Linux): [StringsToXML.jar](https://github.com/snappdevelopment/StringsToXMLNative/releases/download/1.0/StringsToXML.jar)
+- Source: [Release 1.0](https://github.com/snappdevelopment/StringsToXMLNative/archive/1.0.zip)
 
 ## Usage
 
