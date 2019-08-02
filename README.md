@@ -4,13 +4,13 @@
 
 StringsToXML is an application to convert translated strings into an Android compatible XML format. 
 
-Many hobbyist Android developers use spreadsheets to manage their app translations. In order to import translated string into Android Studio, developers have to create a `strings.xml` file for each language. With StringsToXML it is possible, to copy and paste translated strings and their respective IDs, and save them as an XML file.
+Many hobbyist Android developers use spreadsheets to manage their app translations. In order to import translated strings into Android Studio, developers have to create a `strings.xml` file for each language. With StringsToXML it is possible, to copy and paste translated strings and their respective IDs, and save them as an XML file.
 
 ![gif](screenshots/StringsToXMLGif.gif)
 
 ## About
 
-This app was made using `Kotlin Native` version `1.3` to create a native `macOS client` and a `Java client`, which runs on Win/Mac/Linux. StringsToXML utilizes Kotlin Natives approach to place buisness logic into a common module, which is shared between all platforms. UI code and other platform specific features are implemented seperately.
+This app was made using `Kotlin Native` version `1.3` to create a native `macOS client` and a `Java client`, which runs on Win/Mac/Linux. StringsToXML utilizes Kotlin Natives approach to place business logic into a common module, which is shared between all platforms. UI code and other platform specific features are implemented seperately.
 
 ## Download
 
